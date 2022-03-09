@@ -1,5 +1,3 @@
-{% if False %}
-
 # Introduction
 
 The goal of this project is to provide minimalistic django project template that everyone can use, which _just works_ out of the box and has the basic setup you can expand on.
@@ -7,7 +5,7 @@ The goal of this project is to provide minimalistic django project template that
 
 ### Main features
 
-*Rest API for a Netfix Like PAge
+*Rest API for a Netfix Like Page
 
 * Separated dev and production settings
 
