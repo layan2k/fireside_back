@@ -21,7 +21,7 @@ The goal of this project is to provide minimalistic django project template that
 * SQLite by default if no env variable is set
 
 
-# {{ Fireside API}}
+#  Fireside API
 
 # Getting Started
 
