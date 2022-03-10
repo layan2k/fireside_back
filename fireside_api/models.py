@@ -13,10 +13,6 @@ MOVIE_CHOICES = {
     ('seasonal', 'Seasonal'),
     ('single', 'Single')
 }
-PACKAGE_CHOICES = {
-    ('premium', 'Premium'),
-    ('basic', 'Basic')
-}
 
 
 class CustomUser(AbstractUser):
@@ -29,7 +25,6 @@ class Profile(models.Model):
     name=models.CharField(max_length=225)
     age_limit=models.CharField(max_length=10, choices=AGE_CHOICES)
     uuid= models.UUIDField(default=uuid4)
-    payment = models.ManyToManyField('Payment')
 
 
 class Movie(models.Model):
@@ -48,10 +43,3 @@ class Video(models.Model):
     """Video Model"""
     title=models.CharField(max_length=225, blank=True, null=True)
     file=models.FileField(upload_to="movies")
-
-class Payment(models.Model):
-    """Payment Model"""
-    type= models.CharField(max_length=10,choices=PACKAGE_CHOICES)
-    cardno= models.IntegerField()
-    cardname= models.CharField(max_length=100)
-    cvv = models.CharField(max_length=4)

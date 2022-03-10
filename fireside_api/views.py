@@ -1,7 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from .forms import ProfileForm
 from fireside_api.models import Movie
 from fireside_api.serializer import MovieSerializer, ProfileSerializer
 from .models import Profile, Movie
@@ -30,24 +29,14 @@ class ProfileCreate(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class Watch(APIView):
-    def get(self,request,profile_id):
-        try:
-            profile=Profile.objects.get(uuid=profile_id)
-
-            movies=Movie.objects.filter(age_limit=profile.age_limit)
-
-            try:
-                showcase= MovieSerializer(movies)
-            except :
-                showcase=None
+    def get(self, request, pk):
+            profile=Profile.objects.get(uuid=pk)
+            agelimit = profile.age_limit
+            movies=Movie.objects.get(age_limit=agelimit)
+            showcase= MovieSerializer(movies)
 
 
-            return Response(request,{
-            'movies':movies,
-            'show_case':showcase.data
-            })
-        except Profile.DoesNotExist:
-            return None
+            return Response(showcase.data)
 
 
 
@@ -64,17 +53,15 @@ class ShowMovieDetail(APIView):
 
 
 class ShowMovie(APIView):
-    def get(self,request,movie_id,*args, **kwargs):
+    def get(self,request,movie_id):
         try:
 
-            movie=Movie.objects.get(uuid=movie_id)
+            movies=Movie.objects.get(uuid=movie_id)
 
-            movie=movie.videos.values()
-            serializer = MovieSerializer(movie)
+            serializer = MovieSerializer(movies)
 
 
-            return Response(request,'showMovie.html',{
-                'movie':list(serializer.data)
-            })
+            return Response(serializer.data)
         except Movie.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
