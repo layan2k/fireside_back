@@ -58,6 +58,11 @@ API main Endpoints
 -Get more Authentication Endpoints from [djoser](https://djoser.readthedocs.io/en/latest/base_endpoints.html)
 
 
+### Test Users
+
+username : test
+password : testing123
+
 ## Authors
 
 -[Leslie Shumba](https://github.com/layan2k)
