@@ -32,7 +32,7 @@ class Movie(models.Model):
     description = models.TextField(blank=True, null=True)
     create = models.DateTimeField()
     uuid = models.UUIDField(default=uuid4)
-    type = models.CharField(max_length=10, choices=MOVIE_CHOICES)
+    movie_type = models.CharField(max_length=10, choices=MOVIE_CHOICES)
     videos = models.ManyToManyField('Video')
     flyer = models.ImageField(upload_to='flyers')
     age_limit = models.CharField(max_length=10, choices=AGE_CHOICES)
