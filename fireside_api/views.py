@@ -4,9 +4,8 @@ Views and logic for the fireside REST API
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from fireside_api.models import Movie
+from fireside_api.models import * 
 from fireside_api.serializer import MovieSerializer, ProfileSerializer
-from .models import Profile, Movie
 
 
 class MovieList(APIView):
@@ -92,6 +91,6 @@ class ShowMovie(APIView):
 
             serializer = MovieSerializer(movies)
 
-            return Response(serializer.data)
+            return Response(serializer.data["get_video"])
         except Movie.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)

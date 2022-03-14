@@ -1,7 +1,7 @@
 """Serializers for data conversion"""
 from rest_framework import serializers
 
-from fireside_api.models import Movie, Profile
+from fireside_api.models import *
 
 
 class MovieSerializer(serializers.ModelSerializer):
@@ -15,4 +15,5 @@ class ProfileSerializer(serializers.ModelSerializer):
     """Serializes Profile data from complex data to json and vice versa. """
     class Meta:
         model = Profile
-        fields = "__all__"
+        fields = "__all__"
+
