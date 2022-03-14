@@ -2,7 +2,7 @@
 from django.urls import path
 
 from fireside_api.views import MovieList, ProfileList, ProfileCreate
-from fireside_api.views import Watch, ShowMovieDetail, ShowMovie
+from fireside_api.views import Watch, ShowMovieDetail
 
 urlpatterns = [
     path('video/', MovieList.as_view()),
@@ -11,5 +11,4 @@ urlpatterns = [
     path('watch/<str:pk>/', Watch.as_view(), name='watch'),
     path('movie/detail/<str:movie_id>/', ShowMovieDetail.as_view(),
          name='show_det'),
-    path('movie/play/<str:movie_id>/', ShowMovie.as_view(), name='play'),
 ]

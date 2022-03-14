@@ -77,21 +77,3 @@ class ShowMovieDetail(APIView):
             return Response(serializer.data)
         except Movie.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
-
-
-class ShowMovie(APIView):
-    """Show Movie Video """
-    def get(self, request, movie_id):
-        """
-        GET request to get video url using the video's uuid
-        endpoint is /api/movie/play/<str:movie_id>/
-        """
-        try:
-
-            movies = Movie.objects.get(uuid=movie_id)
-
-            serializer = MovieSerializer(movies)
-
-            return Response(serializer.data)
-        except Movie.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
