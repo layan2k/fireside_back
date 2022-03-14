@@ -7,9 +7,11 @@ from rest_framework.response import Response
 from fireside_api.models import Movie
 from fireside_api.serializer import MovieSerializer, ProfileSerializer
 from .models import Profile, Movie
+from rest_framework.permissions import IsAuthenticated
 
 
 class MovieList(APIView):
+    permission_classes=[IsAuthenticated]
     """Movies Route"""
     def get(self, request):
         """
@@ -22,6 +24,7 @@ class MovieList(APIView):
 
 
 class ProfileList(APIView):
+    permission_classes=[IsAuthenticated]
     """Profile List Route"""
     def get(self, request):
         """
@@ -34,6 +37,7 @@ class ProfileList(APIView):
 
 
 class ProfileCreate(APIView):
+    permission_classes=[IsAuthenticated]
     """Create Profile Route"""
     def post(self, request):
         """
@@ -48,6 +52,7 @@ class ProfileCreate(APIView):
 
 
 class Watch(APIView):
+    permission_classes=[IsAuthenticated]
     """Watch Video Route"""
     def get(self, request, pk):
         """
@@ -63,6 +68,7 @@ class Watch(APIView):
 
 
 class ShowMovieDetail(APIView):
+    permission_classes=[IsAuthenticated]
     """Show Specific Movie Details"""
     def get(self, request, movie_id):
         """
