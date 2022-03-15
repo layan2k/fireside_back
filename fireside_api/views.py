@@ -7,6 +7,9 @@ from rest_framework.response import Response
 from fireside_api.models import * 
 from fireside_api.serializer import MovieSerializer, ProfileSerializer
 
+from django.db.models import Q
+from rest_framework.decorators import api_view
+
 
 class MovieList(APIView):
     """Movies Route"""
@@ -94,3 +97,17 @@ class ShowMovie(APIView):
             return Response(serializer.data["get_video"])
         except Movie.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
+def search_movie(request, pk):
+    """search a movie by title or description"""
+    query = pk
+    
+    if query:
+        movies = Movie.objects.filter(Q(title__icontains=query) |
+                                      Q(description__icontains=query))
+        serializer = MovieSerializer(movies, many=True)
+        return Response(serializer.data)
+    else:
+        return Response({"movies": []})
