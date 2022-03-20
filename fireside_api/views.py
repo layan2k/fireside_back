@@ -4,7 +4,7 @@ Views and logic for the fireside REST API
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from fireside_api.models import Movie
+from fireside_api.models import *
 from fireside_api.serializer import MovieSerializer, ProfileSerializer
 from .models import Profile, Movie
 from rest_framework.permissions import IsAuthenticated
