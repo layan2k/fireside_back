@@ -87,6 +87,7 @@ class ShowMovieDetail(APIView):
 
 
 class Search_Movie(APIView):
+    permission_classes = [IsAuthenticated]
     """Search Movie Class"""
     def get(request, pk):
         """Search Movie Get request"""
