@@ -8,10 +8,11 @@ from fireside_api.models import Movie
 from fireside_api.serializer import MovieSerializer, ProfileSerializer
 from .models import Profile, Movie
 from rest_framework.permissions import IsAuthenticated
+from django.db.models import Q
 
 
 class MovieList(APIView):
-    permission_classes=[IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     """Movies Route"""
     def get(self, request):
         """
@@ -24,7 +25,7 @@ class MovieList(APIView):
 
 
 class ProfileList(APIView):
-    permission_classes=[IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     """Profile List Route"""
     def get(self, request):
         """
@@ -37,7 +38,7 @@ class ProfileList(APIView):
 
 
 class ProfileCreate(APIView):
-    permission_classes=[IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     """Create Profile Route"""
     def post(self, request):
         """
@@ -52,7 +53,7 @@ class ProfileCreate(APIView):
 
 
 class Watch(APIView):
-    permission_classes=[IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     """Watch Video Route"""
     def get(self, request, pk):
         """
@@ -68,7 +69,7 @@ class Watch(APIView):
 
 
 class ShowMovieDetail(APIView):
-    permission_classes=[IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     """Show Specific Movie Details"""
     def get(self, request, movie_id):
         """
@@ -83,3 +84,17 @@ class ShowMovieDetail(APIView):
             return Response(serializer.data)
         except Movie.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class Search_Movie(APIView):
+    """Search Movie Class"""
+    def get(request, pk):
+        """Search Movie Get request"""
+        query = pk
+        if query:
+            movies = Movie.objects.filter(Q(title__icontains=query) |
+                                          Q(description__icontains=query))
+            serializer = MovieSerializer(movies, many=True)
+            return Response(serializer.data)
+        else:
+            return Response({"movies": []})
