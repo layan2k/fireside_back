@@ -9,17 +9,19 @@ class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = (
-            'uuid',
             'title',
             'description',
             'date_created',
+            'uuid',
             'movie_type',
             'genre',
+            'videos',
+            'flyer',
+            'thumbnail',
             'age_limit',
             'get_flyer',
             'get_thumbnail',
             'get_movies',
-            'videos',
         )
 
 

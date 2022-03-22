@@ -60,10 +60,6 @@ class Movie(models.Model):
     age_limit = models.CharField(max_length=10, choices=AGE_CHOICES)
 
 
-class Meta:
-    """fresh movies displayed first"""
-    ordering = ('-date_created',)
-
     def __str__(self):
         """"string representation"""
         return self.title
@@ -73,6 +69,18 @@ class Meta:
         if self.flyer:
             return ('http://127.0.0.1:8000' + self.flyer.url)
         return ''
+
+    def make_thumbnail(self, flyer, size=(300, 200)):
+        """create thumbnail from flyer"""
+        img = Image.open(flyer)
+        img = img.convert('RGB')
+        img = img.resize(size)
+
+        thumb_io = BytesIO()
+        img.save(thumb_io, format='JPEG', quality=100, subsampling=0)
+
+        thumbnail = File(thumb_io, name=flyer.name)
+        return thumbnail
 
     def get_thumbnail(self):
         """easy access to thumbnail url"""
@@ -85,23 +93,16 @@ class Meta:
                 return ('http://127.0.0.1:8000' + self.thumbnail.url)
             return ''
 
-    def create_thumbnail(self, flyer, size=(300, 200)):
-        """create thumbnail from flyer"""
-        img = Image.open(flyer)
-        img.convert('RGB')
-        img.thumbnail(size)
-
-        thumb_io = BytesIO()
-        img.save(thumb_io, 'JPEG', quality=100, subsampling=0)
-
-        thumbnail = File(thumb_io, name=flyer.name)
-        return thumbnail
-
     def get_movies(self):
         """easy access to video url as a list"""
         if self.videos:
             return [video.get_video() for video in self.videos.all()]
         return ''
+
+class Meta:
+    """fresh movies displayed first"""
+    ordering = ('-date_created',)
+
 
 
 class Video(models.Model):
