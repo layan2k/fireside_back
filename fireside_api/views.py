@@ -12,7 +12,7 @@ from django.db.models import Q
 
 
 class MovieList(APIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     """Movies Route"""
     def get(self, request):
         """
