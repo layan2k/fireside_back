@@ -67,7 +67,7 @@ class Movie(models.Model):
     def get_flyer(self):
         """easy access to flyer url"""
         if self.flyer:
-            return ('http://127.0.0.1:8000' + self.flyer.url)
+            return ('https://firesidebackapp.herokuapp.com' + self.flyer.url)
         return ''
 
     def make_thumbnail(self, flyer, size=(300, 200)):
@@ -85,12 +85,12 @@ class Movie(models.Model):
     def get_thumbnail(self):
         """easy access to thumbnail url"""
         if self.thumbnail:
-            return ('http://127.0.0.1:8000' + self.thumbnail.url)
+            return ('https://firesidebackapp.herokuapp.com' + self.thumbnail.url)
         else:
             if self.flyer:
                 self.thumbnail = self.make_thumbnail(self.flyer)
                 self.save()
-                return ('http://127.0.0.1:8000' + self.thumbnail.url)
+                return ('https://firesidebackapp.herokuapp.com' + self.thumbnail.url)
             return ''
 
     def get_movies(self):
@@ -117,5 +117,5 @@ class Video(models.Model):
     def get_video(self):
         """easy access to each video url"""
         if self.file:
-            return ('http://127.0.0.1:8000' + self.file.url)
+            return ('https://firesidebackapp.herokuapp.com' + self.file.url)
         return ''
