@@ -23,11 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'cgvfytfuyfuyfyufyufyuuf'#*#
 #  env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*',]
 
@@ -92,11 +92,11 @@ WSGI_APPLICATION = 'fireside.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': '',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dbet5cb9a7f9pl',
+        'USER': 'kdjjllifgjkaml',
+        'PASSWORD': 'a8fb5e1e46a65471b7f8b2c34959dac152ddee0f36739d459b42f957bfeb5bfd',
+        'HOST': 'ec2-3-229-161-70.compute-1.amazonaws.com',
         'PORT': ''
     }
 }
@@ -175,7 +175,7 @@ CORS_ALLOWED_ORIGINS = [
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_ACCESS_KEY_ID = 'AKIAQTBLMEFSXVWNFAPU'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'firesidebackapp'
 AWS_QUERYSTRING_AUTH = False
